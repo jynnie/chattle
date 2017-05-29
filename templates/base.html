@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>{% if title %}{{ title }} - chattle{% else %}Chattle{% endif %}</title>
+  </head>
+  <body>
+    <div>
+      Chattle:
+      <a href="/index">Home</a>
+    </div>
+    <hr>
+    {% block content %}{% endblock %}
+</html>

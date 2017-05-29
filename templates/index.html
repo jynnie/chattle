@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Welcome boss</p>
+
+{% for message in messages %}
+  <p>{{ message[0] }}: {{ message[1] }}</p>
+{% endfor %}
+
+<form action="/message" method="get" role="form">
+  <input type="text" name="say" id="say" placeholder="message"> <br>
+  <input type="submit" value="send">
+</form>
+{% endblock %}
