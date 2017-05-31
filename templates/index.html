@@ -1,14 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>Welcome boss</p>
+{% if session['logged_in'] %} <!--if logged in we see options to send messages-->
 
-{% for message in messages %}
-  <p>{{ message[0] }}: {{ message[1] }}</p>
-{% endfor %}
+  <p>Welcome {{session['name']}}</p>
 
-<form action="/message" method="get" role="form">
-  <input type="text" name="say" id="say" placeholder="message"> <br>
-  <input type="submit" value="send">
-</form>
+  {% for i in range(messages|length) %} <!--renders all previous messages-->
+    <p>{{ messages[i][0] }} <strong>{{ messages[i][1] }}</strong>:
+      {{ messages[i][2] }}
+      [<a href={{ "/delete?m=" + i|string}}>X</a>]</p>
+  {% endfor %}
+
+  <form action="/message" method="get" role="form">
+    <input type="text" name="say" id="say" placeholder="message"> <br>
+    <input type="submit" value="send">
+  </form>
+
+{% else %}
+
+  <p>Choose a username to enter the chat room</p>
+
+  <form action="/user" method="get" role="form">
+    <input type="text" name="name" id="name" placeholder="username"> <br>
+    <input type="submit" value="enter">
+  </form>
+
+{% endif %}
 {% endblock %}
